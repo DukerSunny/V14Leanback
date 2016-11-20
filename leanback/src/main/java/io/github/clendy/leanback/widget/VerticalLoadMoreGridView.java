@@ -17,10 +17,14 @@
 package io.github.clendy.leanback.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.FocusFinder;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
+
+import io.github.clendy.leanback.R;
 
 /**
  * A vertically scrolling lists that supports paging loading
@@ -33,9 +37,14 @@ public class VerticalLoadMoreGridView extends VerticalGridView {
 
     private static final String TAG = VerticalLoadMoreGridView.class.getSimpleName();
 
+    private Context mContext;
+    private boolean canLoadMore = false;
+    private boolean addLoadingView = false;
+    private int allLoadedToastCount = 0;
+    private int mLoadState = OnLoadMoreListener.STATE_MORE_LOADED;
+
     private OnLoadMoreListener mLoadMoreListener;
 
-    private int mLoadState = OnLoadMoreListener.STATE_MORE_LOADED;
 
     public VerticalLoadMoreGridView(Context context) {
         this(context, null);
@@ -47,24 +56,38 @@ public class VerticalLoadMoreGridView extends VerticalGridView {
 
     public VerticalLoadMoreGridView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        mContext = context;
         init(context, attrs);
     }
 
     private void init(Context context, AttributeSet attrs) {
-
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.lbLoadMoreGridView);
+        try {
+            canLoadMore = a.getBoolean(R.styleable.lbLoadMoreGridView_canLoadMore, false);
+            addLoadingView = a.getBoolean(R.styleable.lbLoadMoreGridView_addLoadingView, false);
+        } finally {
+            a.recycle();
+        }
     }
 
+    /**
+     * if you want invoke this method to load more data, you must to implement
+     * the interface {@link OnLoadMoreListener}
+     */
     public void loadMoreData() {
-        if (isMoreLoaded()) {
+        if (canLoadMore && isMoreLoaded()) {
             this.post(new Runnable() {
                 @Override
                 public void run() {
                     if (mLoadMoreListener != null) {
                         notifyMoreLoading();
                         mLoadMoreListener.loadMore();
+                        Toast.makeText(mContext, "Loading more data...", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
+        } else if (canLoadMore && isAllLoaded() && allLoadedToastCount++ <= 0) {
+            Toast.makeText(mContext, "All data loaded!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -72,14 +95,25 @@ public class VerticalLoadMoreGridView extends VerticalGridView {
         mLoadMoreListener = loadMoreListener;
     }
 
+    /**
+     * determine whether the focus is located on the leftmost column
+     *
+     * @return true if the focus on the leftmost column
+     */
     public boolean isFocusOnLeftmostColumn() {
         if (mLayoutManager != null && getFocusedChild() != null) {
             int position = mLayoutManager.getPosition(getFocusedChild());
             return position % mLayoutManager.getNumRows() == 0;
         }
+        hasFocus();
         return false;
     }
 
+    /**
+     * determine whether the focus is located on the rightmost column
+     *
+     * @return true if the focus on the rightmost column
+     */
     public boolean isFocusOnRightmostColumn() {
         if (mLayoutManager != null && getFocusedChild() != null) {
             int position = mLayoutManager.getPosition(getFocusedChild());
@@ -92,7 +126,11 @@ public class VerticalLoadMoreGridView extends VerticalGridView {
         return false;
     }
 
-
+    /**
+     * determine whether the focus is located on the bottom row
+     *
+     * @return true if the focus on the bottom row
+     */
     public boolean isFocusOnBottomRow() {
         if (mLayoutManager != null && getFocusedChild() != null) {
             int position = mLayoutManager.getPosition(getFocusedChild());
@@ -104,6 +142,13 @@ public class VerticalLoadMoreGridView extends VerticalGridView {
         return false;
     }
 
+    /**
+     * determine whether the focus is located on the bottom row
+     *
+     * @param focus    the current focus view
+     * @param position The adapter position of the item which is rendered by this View.
+     * @return true if the focus on the bottom row
+     */
     public boolean isFocusOnBottomRow(View focus, int position) {
         if (mLayoutManager != null && focus != null) {
             int rowCount = mLayoutManager.getItemCount() / mLayoutManager.getNumRows();
@@ -191,6 +236,7 @@ public class VerticalLoadMoreGridView extends VerticalGridView {
                 }
             }
         }
+
         if (direction == FOCUS_DOWN) {
             final int position = getLayoutManager().getPosition(focused);
             if (position < getLayoutManager().getItemCount() - 1) {

@@ -25,7 +25,8 @@
         <attr name="numberOfRows" format="integer"/>
     </declare-styleable>
 
-    <declare-styleable name="lbVerticalLoadMoreGridView">
+    <declare-styleable name="lbLoadMoreGridView">
+        <attr name="canLoadMore" format="boolean"/>
         <attr name="addLoadingView" format="boolean"/>
     </declare-styleable>
 
