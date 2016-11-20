@@ -193,7 +193,6 @@ public class HorizontalActivity extends BaseFragmentActivity<HorizontalPresenter
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     switch (event.getKeyCode()) {
                         case KeyEvent.KEYCODE_DPAD_LEFT:
-
                             return false;
                         case KeyEvent.KEYCODE_DPAD_UP:
                             if (mRecyclerView.isFocusOnTopRow()) {
@@ -220,6 +219,8 @@ public class HorizontalActivity extends BaseFragmentActivity<HorizontalPresenter
     }
 
     private void initRequest() {
+        mAdapter.getItems().clear();
+        mAdapter.notifyDataSetChanged();
         mPresenter = new HorizontalPresenterImpl(this);
         mPresenters.add(mPresenter);
     }
@@ -273,9 +274,7 @@ public class HorizontalActivity extends BaseFragmentActivity<HorizontalPresenter
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.Button7:
-                mAdapter.getItems().clear();
-                mAdapter.notifyDataSetChanged();
-                mPresenter = new HorizontalPresenterImpl(this);
+                initRequest();
                 break;
             default:
                 break;

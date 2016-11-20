@@ -219,6 +219,8 @@ public class VerticalActivity extends BaseFragmentActivity<VerticalPresenter> im
     }
 
     private void initRequest() {
+        mAdapter.getItems().clear();
+        mAdapter.notifyDataSetChanged();
         mPresenter = new VerticalPresenterImpl(this);
         mPresenters.add(mPresenter);
     }
@@ -272,9 +274,7 @@ public class VerticalActivity extends BaseFragmentActivity<VerticalPresenter> im
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.Button7:
-                mAdapter.getItems().clear();
-                mAdapter.notifyDataSetChanged();
-                mPresenter = new VerticalPresenterImpl(this);
+                initRequest();
                 break;
             default:
                 break;
