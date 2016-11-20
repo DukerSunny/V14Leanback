@@ -66,15 +66,19 @@ public class HorizontalPresenterImpl extends BasePresenterImpl<IView, Entity>
                     .doOnSubscribe(new Action0() {
                         @Override
                         public void call() {
-                            mView.showProgress();
+                            if (canPresenting()) {
+                                mView.showProgress();
+                            }
                         }
                     })
-                    .delay(3000, TimeUnit.MILLISECONDS, Schedulers.io())
+                    .delay(5000, TimeUnit.MILLISECONDS, Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Subscriber<List<Entity>>() {
                         @Override
                         public void onCompleted() {
-                            mView.hideProgress();
+                            if (canPresenting()) {
+                                mView.hideProgress();
+                            }
                         }
 
                         @Override
@@ -84,7 +88,7 @@ public class HorizontalPresenterImpl extends BasePresenterImpl<IView, Entity>
 
                         @Override
                         public void onNext(List<Entity> entities) {
-                            if (entities != null && entities.size() > 0) {
+                            if (entities != null && entities.size() > 0 && canPresenting()) {
                                 mView.response(entities);
                                 offset += LIMIT;
                             }

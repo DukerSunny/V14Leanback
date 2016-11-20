@@ -83,6 +83,7 @@ public class HorizontalLoadMoreGridView extends HorizontalGridView {
                 public void run() {
                     if (mLoadMoreListener != null) {
                         notifyMoreLoading();
+                        allLoadedToastCount = 0;
                         mLoadMoreListener.loadMore();
                         mLoadMoreListener.showMsgLoading();
                     }

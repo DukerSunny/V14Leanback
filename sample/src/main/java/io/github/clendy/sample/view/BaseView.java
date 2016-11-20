@@ -18,4 +18,6 @@ public interface BaseView {
     void showError();
 
     void showEmpty();
+
+    boolean isOnFinishing();
 }

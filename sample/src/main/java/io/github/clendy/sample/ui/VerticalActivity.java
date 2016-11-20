@@ -37,7 +37,7 @@ import io.github.clendy.sample.view.IView;
  * @e-mail yc330483161@outlook.com
  */
 public class VerticalActivity extends BaseFragmentActivity<VerticalPresenter> implements IView,
-        View.OnFocusChangeListener {
+        View.OnFocusChangeListener, View.OnClickListener {
 
     private static final String TAG = VerticalActivity.class.getSimpleName();
 
@@ -119,8 +119,16 @@ public class VerticalActivity extends BaseFragmentActivity<VerticalPresenter> im
 
     }
 
+    @Override
+    public boolean isOnFinishing() {
+        return isFinishing();
+    }
+
     private void initView() {
         initRecyclerView();
+
+        mButton7.setOnClickListener(this);
+
         mBtnArray = new SparseArray<>(7);
         mBtnArray.append(0, mButton1);
         mBtnArray.append(1, mButton2);
@@ -132,6 +140,7 @@ public class VerticalActivity extends BaseFragmentActivity<VerticalPresenter> im
         for (int i = 0; i < mBtnArray.size(); i++) {
             mBtnArray.get(i).setOnFocusChangeListener(this);
         }
+
     }
 
     private void initRecyclerView() {
@@ -257,5 +266,19 @@ public class VerticalActivity extends BaseFragmentActivity<VerticalPresenter> im
             default:
                 return super.onKeyDown(keyCode, event);
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.Button7:
+                mAdapter.getItems().clear();
+                mAdapter.notifyDataSetChanged();
+                mPresenter = new VerticalPresenterImpl(this);
+                break;
+            default:
+                break;
+        }
+
     }
 }

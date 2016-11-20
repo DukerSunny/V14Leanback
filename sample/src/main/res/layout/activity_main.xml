@@ -8,15 +8,16 @@
     tools:context="io.github.clendy.sample.ui.MainActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/vertical"
-            android:layout_width="match_parent"
+            android:layout_width="460dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/selector_bg_btn"
             android:focusable="true"
             android:gravity="center"
@@ -27,8 +28,9 @@
 
         <Button
             android:id="@+id/horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="460dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
             android:background="@drawable/selector_bg_btn"
             android:focusable="true"

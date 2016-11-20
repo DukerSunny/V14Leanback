@@ -40,4 +40,8 @@ public class BasePresenterImpl<M extends BaseView, V> implements BasePresenter {
 
         mView = null;
     }
+
+    protected boolean canPresenting(){
+        return mView != null && !mView.isOnFinishing();
+    }
 }

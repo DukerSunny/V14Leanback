@@ -104,7 +104,7 @@
             android:background="@drawable/selector_bg2_btn"
             android:focusable="true"
             android:gravity="center"
-            android:text="Button7"
+            android:text="refresh"
             android:textColor="@android:color/white"
             android:textSize="16sp"/>
 

@@ -942,35 +942,19 @@ public final class GridLayoutManager extends RecyclerView.LayoutManager {
     }
 
     final int getOpticalLeft(View v) {
-//        return ((LayoutParams) v.getLayoutParams()).getOpticalLeft(v);
-        if (v != null) {
-            return ((LayoutParams) v.getLayoutParams()).getOpticalLeft(v);
-        }
-        return 0;
+        return ((LayoutParams) v.getLayoutParams()).getOpticalLeft(v);
     }
 
     final int getOpticalRight(View v) {
-//        return ((LayoutParams) v.getLayoutParams()).getOpticalRight(v);
-        if (v != null) {
-            return ((LayoutParams) v.getLayoutParams()).getOpticalRight(v);
-        }
-        return 0;
+        return ((LayoutParams) v.getLayoutParams()).getOpticalRight(v);
     }
 
     final int getOpticalTop(View v) {
-//        return ((LayoutParams) v.getLayoutParams()).getOpticalTop(v);
-        if (v != null) {
-            return ((LayoutParams) v.getLayoutParams()).getOpticalTop(v);
-        }
-        return 0;
+        return ((LayoutParams) v.getLayoutParams()).getOpticalTop(v);
     }
 
     final int getOpticalBottom(View v) {
-//        return ((LayoutParams) v.getLayoutParams()).getOpticalBottom(v);
-        if (v != null) {
-            return ((LayoutParams) v.getLayoutParams()).getOpticalBottom(v);
-        }
-        return 0;
+        return ((LayoutParams) v.getLayoutParams()).getOpticalBottom(v);
     }
 
     private int getViewMin(View v) {
@@ -984,17 +968,8 @@ public final class GridLayoutManager extends RecyclerView.LayoutManager {
     int mViewPrimarySize = 0;
 
     private int getViewPrimarySize(View view) {
-//        LayoutParams p = (LayoutParams) view.getLayoutParams();
-//        return mOrientation == HORIZONTAL ? p.getOpticalWidth(view) : p.getOpticalHeight(view);
-        if (view != null) {
-            LayoutParams p = (LayoutParams) view.getLayoutParams();
-            if (mOrientation == HORIZONTAL) {
-                mViewPrimarySize = p.getOpticalWidth(view);
-            } else {
-                mViewPrimarySize = p.getOpticalHeight(view);
-            }
-        }
-        return mViewPrimarySize;
+        LayoutParams p = (LayoutParams) view.getLayoutParams();
+        return mOrientation == HORIZONTAL ? p.getOpticalWidth(view) : p.getOpticalHeight(view);
     }
 
     private int getViewCenter(View view) {
@@ -1006,23 +981,13 @@ public final class GridLayoutManager extends RecyclerView.LayoutManager {
     }
 
     private int getViewCenterX(View v) {
-//        LayoutParams p = (LayoutParams) v.getLayoutParams();
-//        return p.getOpticalLeft(v) + p.getAlignX();
-        if (v != null) {
-            LayoutParams p = (LayoutParams) v.getLayoutParams();
-            return p.getOpticalLeft(v) + p.getAlignX();
-        }
-        return 0;
+        LayoutParams p = (LayoutParams) v.getLayoutParams();
+        return p.getOpticalLeft(v) + p.getAlignX();
     }
 
     private int getViewCenterY(View v) {
-//        LayoutParams p = (LayoutParams) v.getLayoutParams();
-//        return p.getOpticalTop(v) + p.getAlignY();
-        if (v != null) {
-            LayoutParams p = (LayoutParams) v.getLayoutParams();
-            return p.getOpticalTop(v) + p.getAlignY();
-        }
-        return 0;
+        LayoutParams p = (LayoutParams) v.getLayoutParams();
+        return p.getOpticalTop(v) + p.getAlignY();
     }
 
     /**

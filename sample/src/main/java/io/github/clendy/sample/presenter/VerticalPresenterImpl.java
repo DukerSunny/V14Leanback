@@ -21,7 +21,7 @@ import rx.schedulers.Schedulers;
  * @e-mail yc330483161@outlook.com
  */
 public class VerticalPresenterImpl extends BasePresenterImpl<IView, Entity>
-        implements VerticalPresenter{
+        implements VerticalPresenter {
 
     private int offset = 0;
     private static final int LIMIT = 20;
@@ -66,7 +66,9 @@ public class VerticalPresenterImpl extends BasePresenterImpl<IView, Entity>
                     .doOnSubscribe(new Action0() {
                         @Override
                         public void call() {
-                            mView.showProgress();
+                            if (canPresenting()) {
+                                mView.showProgress();
+                            }
                         }
                     })
                     .delay(3000, TimeUnit.MILLISECONDS, Schedulers.io())
@@ -74,7 +76,9 @@ public class VerticalPresenterImpl extends BasePresenterImpl<IView, Entity>
                     .subscribe(new Subscriber<List<Entity>>() {
                         @Override
                         public void onCompleted() {
-                            mView.hideProgress();
+                            if (canPresenting()) {
+                                mView.hideProgress();
+                            }
                         }
 
                         @Override
@@ -84,7 +88,7 @@ public class VerticalPresenterImpl extends BasePresenterImpl<IView, Entity>
 
                         @Override
                         public void onNext(List<Entity> entities) {
-                            if (entities != null && entities.size() > 0) {
+                            if (entities != null && entities.size() > 0 && canPresenting()) {
                                 mView.response(entities);
                                 offset += LIMIT;
                             }

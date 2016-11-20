@@ -17,11 +17,14 @@
 package io.github.clendy.leanback.utils;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 
 /**
  * AnimUtil
@@ -31,6 +34,14 @@ import android.view.View;
  * @e-mail yc330483161@outlook.com
  */
 public class AnimUtil {
+
+    public static Animation zoomAnimation(float startScale, float endScale, long duration) {
+        ScaleAnimation anim = new ScaleAnimation(startScale, endScale, startScale, endScale, Animation.RELATIVE_TO_SELF,
+                0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim.setFillAfter(true);
+        anim.setDuration(duration);
+        return anim;
+    }
 
     public static synchronized void animateScaleUp(View v, float targetScale) {
         float currentScaleX = v.getScaleX();
@@ -62,6 +73,28 @@ public class AnimUtil {
                                  Animator.AnimatorListener listener) {
         v.animate().scaleX(scaleX).scaleY(scaleY).setDuration(duration).setListener(listener).start();
 
+    }
+
+    public static void scaleUp(View target, float value, long duration) {
+        ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(new ViewWrapper(target),
+                "width", 1.0f, value);
+        ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(new ViewWrapper(target),
+                "height", 1.0f, value);
+        AnimatorSet mAnimatorSet = new AnimatorSet();
+        mAnimatorSet.playTogether(scaleXAnimator, scaleYAnimator);
+        mAnimatorSet.setDuration(duration);
+        mAnimatorSet.start();
+    }
+
+    public static void scaleDown(View target, float value, long duration) {
+        ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(new ViewWrapper(target),
+                "width", value, 1.0f);
+        ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(new ViewWrapper(target),
+                "height", value, 1.0f);
+        AnimatorSet mAnimatorSet = new AnimatorSet();
+        mAnimatorSet.playTogether(scaleXAnimator, scaleYAnimator);
+        mAnimatorSet.setDuration(duration);
+        mAnimatorSet.start();
     }
 
 }

@@ -80,8 +80,9 @@ public class VerticalLoadMoreGridView extends VerticalGridView {
                 public void run() {
                     if (mLoadMoreListener != null) {
                         notifyMoreLoading();
-                        mLoadMoreListener.loadMore();
+                        allLoadedToastCount = 0;
                         mLoadMoreListener.showMsgLoading();
+                        mLoadMoreListener.loadMore();
                     }
                 }
             });
@@ -253,4 +254,8 @@ public class VerticalLoadMoreGridView extends VerticalGridView {
         return null;
     }
 
+    @Override
+    public void addView(View child, int index) {
+        super.addView(child, index);
+    }
 }
