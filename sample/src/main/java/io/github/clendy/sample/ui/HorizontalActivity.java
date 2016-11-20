@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -64,7 +63,6 @@ public class HorizontalActivity extends BaseFragmentActivity<HorizontalPresenter
     private View mOldFocusView;
     private SparseArray<Button> mBtnArray;
     private LoadMoreAdapter mAdapter;
-    private List<Entity> mEntityList = new ArrayList<>();
     private HorizontalPresenter mPresenter;
 
     @Override
