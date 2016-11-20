@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="lbBaseGridView">
+        <attr name="focusOutFront" format="boolean"/>
+        <attr name="focusOutEnd" format="boolean"/>
+        <attr name="focusOutSideStart" format="boolean"/>
+        <attr name="focusOutSideEnd" format="boolean"/>
+        <attr name="horizontalMargin" format="dimension"/>
+        <attr name="verticalMargin" format="dimension"/>
+        <attr name="android:gravity"/>
+    </declare-styleable>
+
+    <declare-styleable name="lbVerticalGridView">
+        <attr name="columnWidth" format="dimension">
+            <enum name="wrap_content" value="-2"/>
+        </attr>
+        <attr name="numberOfColumns" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="lbHorizontalGridView">
+        <attr name="rowHeight" format="dimension">
+            <enum name="wrap_content" value="-2"/>
+        </attr>
+        <attr name="numberOfRows" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="lbVerticalLoadMoreGridView">
+        <attr name="addLoadingView" format="boolean"/>
+    </declare-styleable>
+
+</resources>

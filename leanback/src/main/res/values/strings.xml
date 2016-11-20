@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Leanback</string>
+
+    <string name="loading">加载数据中&#8230;</string>
+</resources>
