@@ -39,7 +39,7 @@ public class HorizontalPresenterImpl extends BasePresenterImpl<IView, Entity>
         doRequest();
     }
 
-    public void doRequest() {
+    private void doRequest() {
         if (offset < COUNT) {
             mSubscriptionList.add(Observable
                     .create(new Observable.OnSubscribe<List<Entity>>() {
@@ -47,7 +47,7 @@ public class HorizontalPresenterImpl extends BasePresenterImpl<IView, Entity>
                         public void call(Subscriber<? super List<Entity>> subscriber) {
                             List<Entity> entities = new ArrayList<>();
                             if (offset < 100) {
-                                for (int i = 0; i < 20; i++) {
+                                for (int i = 0; i < LIMIT; i++) {
                                     int random = (int) (Math.random() * 200);
                                     entities.add(new Entity(random, "She is GaoYuanyuan", null));
                                 }
@@ -86,7 +86,7 @@ public class HorizontalPresenterImpl extends BasePresenterImpl<IView, Entity>
                         public void onNext(List<Entity> entities) {
                             if (entities != null && entities.size() > 0) {
                                 mView.response(entities);
-                                offset += 20;
+                                offset += LIMIT;
                             }
                         }
                     }));

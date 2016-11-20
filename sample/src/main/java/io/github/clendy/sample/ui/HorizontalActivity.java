@@ -37,7 +37,8 @@ import io.github.clendy.sample.view.IView;
  * @time 2016/11/20 16:13
  * @e-mail yc330483161@outlook.com
  */
-public class HorizontalActivity extends BaseFragmentActivity<HorizontalPresenter> implements IView, View.OnFocusChangeListener {
+public class HorizontalActivity extends BaseFragmentActivity<HorizontalPresenter> implements IView,
+        View.OnFocusChangeListener {
 
     private static final String TAG = VerticalActivity.class.getSimpleName();
 
@@ -177,7 +178,6 @@ public class HorizontalActivity extends BaseFragmentActivity<HorizontalPresenter
         mRecyclerView.setOnChildLaidOutListener(new OnChildLaidOutListener() {
             @Override
             public void onChildLaidOut(ViewGroup parent, View view, int position, long id) {
-                Log.d(TAG, "onChildLaidOut position:" + position);
             }
         });
 
