@@ -151,6 +151,16 @@ public class VerticalActivity extends BaseFragmentActivity<VerticalPresenter> im
             public void loadMore() {
                 mPresenter.onResume();
             }
+
+            @Override
+            public void showMsgLoading() {
+                toast("正在加载中...");
+            }
+
+            @Override
+            public void showMsgAllLoaded() {
+                toast("没有更多数据！");
+            }
         });
 
         mRecyclerView.setOnChildSelectedListener(new OnChildSelectedListener() {

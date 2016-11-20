@@ -153,6 +153,16 @@ public class HorizontalActivity extends BaseFragmentActivity<HorizontalPresenter
                 mPresenter.onResume();
             }
 
+            @Override
+            public void showMsgLoading() {
+                toast("Loading more data...");
+            }
+
+            @Override
+            public void showMsgAllLoaded() {
+                toast("All data loaded!");
+            }
+
         });
 
         mRecyclerView.setOnChildSelectedListener(new OnChildSelectedListener() {

@@ -30,4 +30,6 @@ public interface OnLoadMoreListener {
     int STATE_ALL_LOADED = 3;
 
     void loadMore();
+    void showMsgLoading();
+    void showMsgAllLoaded();
 }

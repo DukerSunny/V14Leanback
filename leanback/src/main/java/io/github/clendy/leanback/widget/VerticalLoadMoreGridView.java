@@ -22,7 +22,6 @@ import android.util.AttributeSet;
 import android.view.FocusFinder;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import io.github.clendy.leanback.R;
 
@@ -82,12 +81,14 @@ public class VerticalLoadMoreGridView extends VerticalGridView {
                     if (mLoadMoreListener != null) {
                         notifyMoreLoading();
                         mLoadMoreListener.loadMore();
-                        Toast.makeText(mContext, "Loading more data...", Toast.LENGTH_SHORT).show();
+                        mLoadMoreListener.showMsgLoading();
                     }
                 }
             });
         } else if (canLoadMore && isAllLoaded() && allLoadedToastCount++ <= 0) {
-            Toast.makeText(mContext, "All data loaded!", Toast.LENGTH_SHORT).show();
+            if (mLoadMoreListener != null) {
+                mLoadMoreListener.showMsgAllLoaded();
+            }
         }
     }
 
